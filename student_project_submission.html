@@ -17097,6 +17097,18 @@ weighted avg       0.77      0.77      0.77     14304
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>What do precision and recall mean in our project?</strong>  <br>
+Precision represents how often the model is correct when model predicts yes. Recall represents how often the model predict yes when it's actually yes. In our case, 'yes' decision for class 1 is "at least 5 days between admission and discharge is required" and 'yes' decision for class 0 is "less than 5 days between admission and discharge is required".</p>
+<p><strong>Since it is impossible to optimize for both precision and recall, what metric is more valuable in the current business context? why? How will you decide what levels of precision and recall would be enough for the current scenario?</strong>  <br>
+In our case precision and recall for class 1 are a bit low but those for class 0 are high.</p>
+<p>In order to use this model as a screening tool before deeply identify with another test for class 1 (patients who likely to be in the hospital for at least 5 days), we may focus more on increasing the recall of class 1. In contrast, if we not require many patients but want model to precisely identify the interested patients without further screening, precision should be focused more instead.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="7.-Evaluating-Potential-Model-Biases-with-Aequitas-Toolkit">7. Evaluating Potential Model Biases with Aequitas Toolkit<a class="anchor-link" href="#7.-Evaluating-Potential-Model-Biases-with-Aequitas-Toolkit">&#182;</a></h1>
 </div>
 </div>
@@ -17272,7 +17284,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Question 12</strong>: For the gender and race fields, please plot two metrics that are important for patient selection below and state whether there is a significant bias in your model across any of the groups along with justification for your statement.</p>
-<p><strong>ANS:</strong> It seems TPR is low in the asian group cmpared to other races.</p>
+<p><strong>ANS:</strong> It seems TPR is low in the asian group compared to other races.</p>
 
 </div>
 </div>
@@ -17366,6 +17378,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>It seems TPR is low in the asian group compared to other races. The cause can be that the asian samples are only 96 while all other races are more than more samples. For fpr, tnr, and precision, there is no obvious bias across genders and races.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Fairness-Analysis-Example---Relative-to-a-Reference-Group">Fairness Analysis Example - Relative to a Reference Group<a class="anchor-link" href="#Fairness-Analysis-Example---Relative-to-a-Reference-Group">&#182;</a></h2>
 </div>
 </div>
@@ -17449,6 +17469,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The result is the smae as above. Asian TPR is significant lower than that from Caucasian.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[62]:</div>
@@ -17483,6 +17511,14 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There is no obvious bias between male and female.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>
